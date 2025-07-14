@@ -10,9 +10,8 @@ title: Home
 ### **Summary**
 David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experience.
 
-<form action="https://formspree.io/f/xkgzwaar" method="POST">
-  <input type="hidden" name="_next" value="?success=1">
-  <input type="hidden" name="_subject" value="Inquiry from webite form">
+<form id="https://formspree.io/f/xkgzwaar">
+  <input type="hidden" name="_subject" value="New message from your website!">
 
   <label>
     Your name:<br>
@@ -32,9 +31,37 @@ David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experie
   <button type="submit">Send</button>
 </form>
 
-<div id="sent" style="display:none;">✅ Thanks! Your message has been sent.</div>
+<div id="success-message" style="display: none; color: green; margin-top: 1em;">
+  ✅ Thanks! Your message has been sent.
+</div>
+
 <script>
-  if (new URLSearchParams(location.search).get('success')) {
-    document.getElementById('sent').style.display = 'block';
-  }
+  const form = document.getElementById("contact-form");
+  const success = document.getElementById("success-message");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // Stop the page from reloading
+
+    const data = new FormData(form);
+    const action = "https://formspree.io/f/YOUR_FORM_ID"; // ← replace this
+
+    try {
+      const response = await fetch(action, {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        form.reset();
+        success.style.display = "block";
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Error submitting the form. Please check your connection.");
+    }
+  });
 </script>
