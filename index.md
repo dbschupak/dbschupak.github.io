@@ -5,7 +5,7 @@ title: Home
 
 # **David Schupak Analytics**
 **Data services that make your life easier** <br>
-[dbschupak@gmail.com](mailto:dbschupak@gmail.com) | [linkedin.com/in/davidschupak](linkedin.com/in/davidschupak )
+[linkedin.com/in/davidschupak](linkedin.com/in/davidschupak )
 
 ### **Summary**
 David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experience.
