@@ -11,7 +11,7 @@ title: Home
 David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experience.
 
 <form action="https://formspree.io/f/xkgzwaar" method="POST">
-  <input type="hidden" name="_next" value="#sent">
+  <input type="hidden" name="_next" value="?success=1">
   <input type="hidden" name="_subject" value="Inquiry from webite form">
 
   <label>
@@ -32,16 +32,9 @@ David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experie
   <button type="submit">Send</button>
 </form>
 
-<!-- 🔽 hidden by default; becomes visible when page reloads with #sent -->
-<div id="sent" style="display:none; margin-top:1rem; color:green;">
-  ✅ Thanks! Your message has been sent.
-</div>
-
+<div id="sent" style="display:none;">✅ Thanks! Your message has been sent.</div>
 <script>
-  /* If the URL ends in #sent, un‑hide the success banner */
-  if (location.hash === '#sent') {
+  if (new URLSearchParams(location.search).get('success')) {
     document.getElementById('sent').style.display = 'block';
-    /* optional: scroll to it */
-    document.getElementById('sent').scrollIntoView({behavior:'smooth'});
   }
 </script>
