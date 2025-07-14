@@ -32,33 +32,16 @@ David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experie
   <button type="submit">Send</button>
 </form>
 
-<div id="success-message" style="display: none; color: green; margin-top: 1em;">
-  ✅ Thanks! Your message has been sent.
+<!-- 🔽 hidden by default; becomes visible when page reloads with #sent -->
+<div id="sent" style="display:none; margin-top:1rem; color:green;">
+  ✅ Thanks! Your message has been sent.
 </div>
 
 <script>
-  const form = document.getElementById("contact-form");
-  const success = document.getElementById("success-message");
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // prevent default page reload
-
-    const data = new FormData(form);
-    const action = "https://formspree.io/f/xyzabc"; // replace with your Formspree endpoint
-
-    const response = await fetch(action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      form.reset();                    // clear the form
-      success.style.display = "block" // show success message
-    } else {
-      alert("Something went wrong. Please try again later.");
-    }
-  });
+  /* If the URL ends in #sent, un‑hide the success banner */
+  if (location.hash === '#sent') {
+    document.getElementById('sent').style.display = 'block';
+    /* optional: scroll to it */
+    document.getElementById('sent').scrollIntoView({behavior:'smooth'});
+  }
 </script>
