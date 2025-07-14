@@ -4,7 +4,7 @@ title: Home
 ---
 
 # **David Schupak Analytics**
-**Data services that make your life easier**
+**Data services that make your life easier** <br>
 [dbschupak@gmail.com](mailto:dbschupak@gmail.com) | [linkedin.com/in/davidschupak](linkedin.com/in/davidschupak )
 
 ### **Summary**
