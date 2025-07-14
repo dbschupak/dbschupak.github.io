@@ -3,3 +3,7 @@
 title: "My Consulting Site"
 theme: minima          # change to any supported theme
 markdown: kramdown     # default; controls which MD parser Jekyll uses
+kramdown:
+  input: GFM              # GitHub‑Flavored Markdown
+  hard_wrap: true         # ← convert single newlines to <br />
+
