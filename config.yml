@@ -1,0 +1,5 @@
+# Tell GitHub Pages to use the built‑in Jekyll engine
+# and apply a ready‑made theme (minima is already bundled)
+title: "My Consulting Site"
+theme: minima          # change to any supported theme
+markdown: kramdown     # default; controls which MD parser Jekyll uses
