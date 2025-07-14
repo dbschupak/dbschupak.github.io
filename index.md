@@ -10,58 +10,57 @@ title: Home
 ### **Summary**
 David has {{ site.time | date: "%Y" | minus: 2019 }} years years of data experience.
 
-<form id="https://formspree.io/f/xkgzwaar">
-  <input type="hidden" name="_subject" value="New message from your website!">
+<!-- Contact section (Markdown is fine; the HTML below passes through Jekyll) -->
+## Get in touch
 
-  <label>
-    Your name:<br>
-    <input type="text" name="name" required>
-  </label><br><br>
+<form id="contact-form" action="https://submit-form.com/Efk4WA1KC" method="POST">
+  <!-- ✨ optional: customise e‑mail subject for yourself -->
+  <input type="hidden" name="_email.subject" value="New message from website">
 
-  <label>
-    Your email:<br>
-    <input type="email" name="email" required>
-  </label><br><br>
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" placeholder="Name" required>
 
-  <label>
-    Your message:<br>
-    <textarea name="message" rows="5" required></textarea>
-  </label><br><br>
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" placeholder="Email" required>
+
+  <label for="message">Message</label>
+  <textarea id="message" name="message" placeholder="Message" required></textarea>
 
   <button type="submit">Send</button>
 </form>
 
-<div id="success-message" style="display: none; color: green; margin-top: 1em;">
-  ✅ Thanks! Your message has been sent.
-</div>
+<!-- Hidden success banner -->
+<p id="contact-success"
+   style="display:none; margin-top:1rem; color:green;">
+  ✅ Thanks! Your message has been sent.
+</p>
 
 <script>
-  const form = document.getElementById("contact-form");
-  const success = document.getElementById("success-message");
+/* ----- stay‑on‑page AJAX submit for Formspark ----- */
+document.getElementById('contact-form').addEventListener('submit', async (e) => {
+  e.preventDefault();                                // stop the normal redirect
+  const form   = e.target;
+  const data   = Object.fromEntries(new FormData(form).entries());
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // Stop the page from reloading
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept':       'application/json',          // ← Formspark needs both
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
 
-    const data = new FormData(form);
-    const action = "https://formspree.io/f/YOUR_FORM_ID"; // ← replace this
-
-    try {
-      const response = await fetch(action, {
-        method: "POST",
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        form.reset();
-        success.style.display = "block";
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      alert("Error submitting the form. Please check your connection.");
+    if (res.ok) {
+      form.reset();                                  // clear the fields
+      document.getElementById('contact-success').style.display = 'block';
+    } else {
+      alert('Submission failed – please try again later.');
     }
-  });
+  } catch {
+    alert('Network error – please check your connection.');
+  }
+});
 </script>
+
