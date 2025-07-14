@@ -5,6 +5,8 @@ title: Home
 
 # Title
 
-Markdown text
-**bold** 
-_italics_.  
+Markdown text <br>
+**bold**  <br>
+_italics_.  <br>
+<br>
+Republish
